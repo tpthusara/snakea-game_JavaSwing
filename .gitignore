@@ -14,6 +14,7 @@
 .classpath
 .c9/
 .iml
+/out
 *.launch
 .settings/
 *.sublime-workspace
