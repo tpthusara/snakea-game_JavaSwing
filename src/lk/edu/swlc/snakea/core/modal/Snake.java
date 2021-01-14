@@ -95,11 +95,6 @@ public class Snake {
         return false;
     }
 
-    /**
-     * @return true when the head of the snake comes in touch with any part of
-     * the body and use this method on calculations of score points
-     */
-
     public boolean runsIntoItself() {
         for (int i = 0; i < this.getLength() - 1; i++) {
             if (this.getHead().getX() == this.piecesOfSnake.get(i).getX() && this.getHead().getY() == this.piecesOfSnake.get(i).getY()) {

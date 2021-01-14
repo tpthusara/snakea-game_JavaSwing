@@ -1,17 +1,17 @@
 package lk.edu.swlc.snakea.core.game;
 
+import lk.edu.swlc.snakea.core.enums.Moves;
+import lk.edu.swlc.snakea.core.interfaces.Updatable;
+import lk.edu.swlc.snakea.core.modal.Snake;
+import lk.edu.swlc.snakea.core.modal.SnakeMeal;
+import lk.edu.swlc.snakea.core.view.SnakeUI;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
 
-import lk.edu.swlc.snakea.core.enums.Moves;
-import lk.edu.swlc.snakea.core.modal.Snake;
-import lk.edu.swlc.snakea.core.modal.SnakeMeal;
-import lk.edu.swlc.snakea.core.view.SnakeUI;
-import lk.edu.swlc.snakea.core.interfaces.Updatable;
-
-public class SnakeGame extends Timer implements ActionListener, Runnable{
+public class SnakeGame extends Timer implements ActionListener, Runnable {
 
     private int width;
     private int height;
@@ -27,7 +27,7 @@ public class SnakeGame extends Timer implements ActionListener, Runnable{
 
     static final int SCREEN_WIDTH = 1280;
     static final int SCREEN_HEIGHT = 720;
-    
+
     public SnakeGame(int width, int height) {
         super(1000, null);
         this.width = width;
@@ -48,25 +48,31 @@ public class SnakeGame extends Timer implements ActionListener, Runnable{
             }
         }
     }
-/**
- * controls whether the game goes on or stops
- * @return 
- */
+
+    /**
+     * controls whether the game goes on or stops
+     *
+     * @return
+     */
     public boolean continues() {
         return continues;
     }
-/**
- * this control is meant to provide a connection to the updatable JPanel that graphically traces the game
- * @param updatable 
- */
+
+    /**
+     * this control is meant to provide a connection to the updatable JPanel that graphically traces the game
+     *
+     * @param updatable
+     */
     public void setUpdatable(Updatable updatable) {
         this.updatable = updatable;
     }
+
     /**
      * this control connects the game to the User Interface
-     * @param ui 
+     *
+     * @param ui
      */
-    public void setUI(SnakeUI ui){
+    public void setUI(SnakeUI ui) {
         this.ui = ui;
     }
 
@@ -87,14 +93,17 @@ public class SnakeGame extends Timer implements ActionListener, Runnable{
         this.ui.updateLabel();
     }
 
-    public void renderMeal(){
+    public void renderMeal() {
         this.snakeMeal = new SnakeMeal(new Random().nextInt(this.width), new Random().nextInt(this.height));
     }
 
+    /**
+     * rendering the meal in a random place
+     */
     @Override
     public void run() {
         try {
-            for(int i = 5; i > 0; i--) {
+            for (int i = 5; i > 0; i--) {
                 renderMeal();
                 Thread.sleep(10000);
             }
@@ -103,18 +112,23 @@ public class SnakeGame extends Timer implements ActionListener, Runnable{
         }
     }
 
+    /**
+     * defines a new thread when ever game starts
+     */
     public void startGame() {
         try {
             thread = new Thread(this);
             thread.start();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-/**
- * define what happens whenever a piece (snakeMeal or body of the snake) or the border of the game is hit
- * @param ae 
- */
+
+    /**
+     * define what happens whenever a piece (snakeMeal or body of the snake) or the border of the game is hit
+     *
+     * @param ae
+     */
     public void actionPerformed(ActionEvent ae) {
         if (!continues) {
             return;
