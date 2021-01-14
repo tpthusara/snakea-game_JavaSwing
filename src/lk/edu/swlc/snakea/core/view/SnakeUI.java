@@ -5,7 +5,7 @@ import javax.swing.*;
 
 import lk.edu.swlc.snakea.core.game.SnakeGame;
 import lk.edu.swlc.snakea.core.interfaces.Updatable;
-import lk.edu.swlc.snakea.core.keyListners.KeyValueListener;
+import lk.edu.swlc.snakea.core.controller.KeyValueListener;
 
 public class SnakeUI implements Runnable {
 
@@ -14,6 +14,7 @@ public class SnakeUI implements Runnable {
     private int sideLength;
     private PlayPanel board;
     private JLabel label;
+    private JLabel overLable;
     private int points;
     private Image frameLogo;
 
@@ -59,7 +60,7 @@ public class SnakeUI implements Runnable {
  */
     public JPanel createPointsPanel() {
         JPanel panel = new JPanel(new GridLayout(1, 3));
-        JLabel pointsName = new JLabel("Your Score Points", JLabel.CENTER);
+        JLabel pointsName = new JLabel("Your Score - ", JLabel.CENTER);
         pointsName.setFont(new Font("Ink Free",Font.BOLD, 20));
         pointsName.setHorizontalAlignment(SwingConstants.CENTER);
         pointsName.setVerticalAlignment(SwingConstants.CENTER);
@@ -67,14 +68,24 @@ public class SnakeUI implements Runnable {
         this.label = new JLabel();
         this.label.setFont(new Font("Ink Free",Font.BOLD, 20));
         this.label.setText(Integer.toString(this.points));
+        this.overLable = new JLabel();
+        this.overLable.setFont(new Font("Ink Free",Font.BOLD, 20));
+        this.overLable.setText("");
         panel.add(pointsName);
         panel.add(this.label);
         panel.setBackground(Color.yellow);
         panel.add(empty);
+        panel.add(this.overLable);
         panel.setPreferredSize(new Dimension(-1, 50));
-
         return panel;
     }
+
+    public JLabel gameOver(){
+        this.overLable.setForeground(Color.RED);
+        this.overLable.setText("Game Over!!!");
+        return this.overLable;
+    }
+
 
     public JFrame getFrame() {
         return this.frame;

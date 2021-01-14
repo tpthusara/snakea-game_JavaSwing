@@ -1,4 +1,4 @@
-package lk.edu.swlc.snakea.core.domain;
+package lk.edu.swlc.snakea.core.modal;
 
 import lk.edu.swlc.snakea.core.enums.Moves;
 

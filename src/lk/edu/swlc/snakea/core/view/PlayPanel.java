@@ -4,9 +4,9 @@ import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.Graphics;
 
-import lk.edu.swlc.snakea.core.domain.SnakePiece;
 import lk.edu.swlc.snakea.core.game.SnakeGame;
 import lk.edu.swlc.snakea.core.interfaces.Updatable;
+import lk.edu.swlc.snakea.core.modal.SnakePiece;
 
 public class PlayPanel extends JPanel implements Updatable {
 

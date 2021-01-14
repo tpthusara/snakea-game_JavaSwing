@@ -1,17 +1,17 @@
 package lk.edu.swlc.snakea.core.game;
 
-import javax.swing.Timer;
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
 
 import lk.edu.swlc.snakea.core.enums.Moves;
-import lk.edu.swlc.snakea.core.domain.SnakeMeal;
+import lk.edu.swlc.snakea.core.modal.Snake;
+import lk.edu.swlc.snakea.core.modal.SnakeMeal;
 import lk.edu.swlc.snakea.core.view.SnakeUI;
 import lk.edu.swlc.snakea.core.interfaces.Updatable;
-import lk.edu.swlc.snakea.core.domain.Snake;
 
-public class SnakeGame extends Timer implements ActionListener {
+public class SnakeGame extends Timer implements ActionListener, Runnable{
 
     private int width;
     private int height;
@@ -22,6 +22,11 @@ public class SnakeGame extends Timer implements ActionListener {
     private int points;
     private SnakeUI ui;
     private Scores scoreTable;
+    private Thread thread;
+
+
+    static final int SCREEN_WIDTH = 1280;
+    static final int SCREEN_HEIGHT = 720;
     
     public SnakeGame(int width, int height) {
         super(1000, null);
@@ -37,9 +42,9 @@ public class SnakeGame extends Timer implements ActionListener {
         int appleY = new Random().nextInt(this.height);
         for (int i = 0; i < this.snake.getLength(); i++) {
             if (appleX != this.snake.getPieces().get(i).getX() && appleY != this.snake.getPieces().get(i).getY() && appleX >= 0 && appleY >= 0) {
-                this.snakeMeal = new SnakeMeal(appleX, appleY);
+                startGame();
             } else {
-                this.snakeMeal = new SnakeMeal(appleX / 2 + 1, appleY / 2 + 1);
+                startGame();
             }
         }
     }
@@ -81,6 +86,31 @@ public class SnakeGame extends Timer implements ActionListener {
         this.points++;
         this.ui.updateLabel();
     }
+
+    public void renderMeal(){
+        this.snakeMeal = new SnakeMeal(new Random().nextInt(this.width), new Random().nextInt(this.height));
+    }
+
+    @Override
+    public void run() {
+        try {
+            for(int i = 5; i > 0; i--) {
+                renderMeal();
+                Thread.sleep(10000);
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void startGame() {
+        try {
+            thread = new Thread(this);
+            thread.start();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 /**
  * define what happens whenever a piece (snakeMeal or body of the snake) or the border of the game is hit
  * @param ae 
@@ -92,18 +122,25 @@ public class SnakeGame extends Timer implements ActionListener {
         this.snake.move();
         if (this.snake.runsInto(this.snakeMeal)) {
             this.snake.grows();
+            thread.stop();
+            this.startGame();
             this.setPoints();
-            this.snakeMeal = new SnakeMeal(new Random().nextInt(this.width), new Random().nextInt(this.height));
         }
         if (this.snake.runsIntoItself()) {
             this.scoreTable.addLastScore(this.points);
             this.continues = false;
+            this.ui.gameOver();
+            thread.stop();
         } else if (this.snake.getHead().getX() == this.width || this.snake.getHead().getX() < 0) {
             this.scoreTable.addLastScore(this.points);
             this.continues = false;
+            this.ui.gameOver();
+            thread.stop();
         } else if (this.snake.getHead().getY() == this.height || this.snake.getHead().getY() < 0) {
             this.scoreTable.addLastScore(this.points);
             this.continues = false;
+            this.ui.gameOver();
+            thread.stop();
         }
         this.updatable.update();
         this.setDelay(1000 / this.snake.getLength());

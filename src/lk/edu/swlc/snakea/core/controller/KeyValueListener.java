@@ -1,16 +1,15 @@
-package lk.edu.swlc.snakea.core.keyListners;
+package lk.edu.swlc.snakea.core.controller;
 
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
 
 import lk.edu.swlc.snakea.core.enums.Moves;
-import lk.edu.swlc.snakea.core.game.SnakeGame;
-import lk.edu.swlc.snakea.core.domain.Snake;
+import lk.edu.swlc.snakea.core.modal.Snake;
+
 
 public class KeyValueListener implements KeyListener {
 
     private Snake snake;
-    private SnakeGame game;
 
     public KeyValueListener(Snake snake) {
         this.snake = snake;
@@ -31,9 +30,6 @@ public class KeyValueListener implements KeyListener {
             case KeyEvent.VK_RIGHT:
                 this.snake.setMoves(Moves.RIGHT);
                 break;
-//            case KeyEvent.VK_ENTER:
-//                this.game.start();
-//                break;
             default:
                 break;
         }
