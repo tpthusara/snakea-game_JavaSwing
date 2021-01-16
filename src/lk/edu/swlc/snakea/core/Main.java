@@ -15,7 +15,7 @@ public class Main {
 
         while (ui.getUpdatable() == null) {
             try {
-                Thread.sleep(1000);
+                Thread.sleep(100);
             } catch (InterruptedException ex) {
                 System.out.println("The drawing board hasn't been created yet.");
             }
