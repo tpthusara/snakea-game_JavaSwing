@@ -1,4 +1,4 @@
-package lk.edu.swlc.snakea.core.game;
+package lk.edu.swlc.snakea.core.gameLogic;
 
 import java.io.File;
 import java.io.FileWriter;

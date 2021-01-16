@@ -3,7 +3,7 @@ package lk.edu.swlc.snakea.core.view;
 import java.awt.*;
 import javax.swing.*;
 
-import lk.edu.swlc.snakea.core.game.SnakeGame;
+import lk.edu.swlc.snakea.core.gameLogic.SnakeGame;
 import lk.edu.swlc.snakea.core.interfaces.Updatable;
 import lk.edu.swlc.snakea.core.controller.KeyValueListener;
 
@@ -25,7 +25,7 @@ public class SnakeUI implements Runnable {
         this.frameLogo = new ImageIcon("src\\lk\\edu\\swlc\\snakea\\core\\assets\\snakea.png").getImage();
     }
 /**
- * this method sets the main frame of the game
+ * this method sets the main frame of the gameLogic
  */
     public void run() {
         this.frame = new JFrame("Game Snakea");
@@ -43,13 +43,13 @@ public class SnakeUI implements Runnable {
     }
 /**
  * this method sets the components on the main frame:
- * 1. the board game
+ * 1. the board gameLogic
  * 2. the panel with the points information
  * @param container 
  */
     public void createComponents(Container container) {
         this.board = new PlayPanel(this.game, this.sideLength);
-        this.board.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        this.board.setBorder(BorderFactory.createLineBorder(Color.RED));
         container.add(this.board);
         container.add(createPointsPanel(), BorderLayout.NORTH);
         this.frame.addKeyListener(new KeyValueListener(this.game.getSnake()));
@@ -86,11 +86,6 @@ public class SnakeUI implements Runnable {
         return this.overLable;
     }
 
-
-    public JFrame getFrame() {
-        return this.frame;
-    }
-
     public JLabel updateLabel() {
         this.label.setText(Integer.toString(this.game.getPoints()));
         return this.label;
@@ -98,13 +93,5 @@ public class SnakeUI implements Runnable {
 
     public Updatable getUpdatable() {
         return this.board;
-    }
-    
-    public int getPoints(){
-        return this.points;
-    }
-    
-    public void setPoints(){
-        this.points++;
     }
 }

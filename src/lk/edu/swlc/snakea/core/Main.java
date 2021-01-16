@@ -1,6 +1,6 @@
 package lk.edu.swlc.snakea.core;
 
-import lk.edu.swlc.snakea.core.game.SnakeGame;
+import lk.edu.swlc.snakea.core.gameLogic.SnakeGame;
 import lk.edu.swlc.snakea.core.view.SnakeUI;
 
 import javax.swing.SwingUtilities;
@@ -15,7 +15,7 @@ public class Main {
 
         while (ui.getUpdatable() == null) {
             try {
-                Thread.sleep(100);
+                Thread.sleep(1000);
             } catch (InterruptedException ex) {
                 System.out.println("The drawing board hasn't been created yet.");
             }

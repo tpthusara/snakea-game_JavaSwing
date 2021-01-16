@@ -9,26 +9,23 @@ public class SnakePiece {
         this.y = y;
     }
 
+    public SnakePiece() {
+    }
+
     public int getX() {
         return this.x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
     }
 
     public int getY() {
         return this.y;
     }
 
-    /**
-     * if the coordinates of this snakePiece take the same values of another snakePiece,
-     * it means the two pieces have made contact and the method returns true
-     *
-     * @param snakePiece
-     * @return
-     */
-    public boolean runsInto(SnakePiece snakePiece) {
-        if (this.x == snakePiece.getX() && this.y == snakePiece.getY()) {
-            return true;
-        }
-        return false;
+    public void setY(int y) {
+        this.y = y;
     }
 
     public String toString() {

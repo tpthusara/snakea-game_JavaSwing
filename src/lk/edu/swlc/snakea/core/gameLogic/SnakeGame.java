@@ -1,4 +1,4 @@
-package lk.edu.swlc.snakea.core.game;
+package lk.edu.swlc.snakea.core.gameLogic;
 
 import lk.edu.swlc.snakea.core.enums.Moves;
 import lk.edu.swlc.snakea.core.interfaces.Updatable;
@@ -50,7 +50,7 @@ public class SnakeGame extends Timer implements ActionListener, Runnable {
     }
 
     /**
-     * controls whether the game goes on or stops
+     * controls whether the gameLogic goes on or stops
      *
      * @return
      */
@@ -59,7 +59,7 @@ public class SnakeGame extends Timer implements ActionListener, Runnable {
     }
 
     /**
-     * this control is meant to provide a connection to the updatable JPanel that graphically traces the game
+     * this control is meant to provide a connection to the updatable JPanel that graphically traces the gameLogic
      *
      * @param updatable
      */
@@ -68,7 +68,7 @@ public class SnakeGame extends Timer implements ActionListener, Runnable {
     }
 
     /**
-     * this control connects the game to the User Interface
+     * this control connects the gameLogic to the User Interface
      *
      * @param ui
      */
@@ -113,7 +113,7 @@ public class SnakeGame extends Timer implements ActionListener, Runnable {
     }
 
     /**
-     * defines a new thread when ever game starts
+     * defines a new thread when ever gameLogic starts
      */
     public void startGame() {
         try {
@@ -125,7 +125,7 @@ public class SnakeGame extends Timer implements ActionListener, Runnable {
     }
 
     /**
-     * define what happens whenever a piece (snakeMeal or body of the snake) or the border of the game is hit
+     * define what happens whenever a piece (snakeMeal or body of the snake) or the border of the gameLogic is hit
      *
      * @param ae
      */
